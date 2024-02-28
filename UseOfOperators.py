@@ -1,6 +1,8 @@
 # Enter two numbers and do the following arithmetic Operations find max and min.
 # i) a+b*c ii) c+a/b
 # iii) a%b+c iV) a*b+c
+
+# pyhton does not support switch case 
 print("Press 1 for a+b*c ")
 print("Press 2 c+a/b")
 print("Press 3 a%b+c")
