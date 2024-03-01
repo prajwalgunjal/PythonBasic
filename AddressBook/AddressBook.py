@@ -34,7 +34,7 @@ if __name__ == "__main__":
             print("Contact added successfully!")
 
         elif choice == "2":
-            print("\n--- Contacts ---")
+            print("\n--- All Contacts ---")
             addressBook.Display()
 
         elif choice == "3":
