@@ -29,7 +29,11 @@ if __name__ == "__main__":
             name = input("Enter Name: ")
             phone = input("Enter Phone: ")
             email = input("Enter Email: ")
-            new_contact = Contact(name, phone, email)
+            address = input("Enter Address: ")
+            city = input("Enter City: ")
+            state = input("Enter State: ")
+            pincode = input("Enter Pincode: ")
+            new_contact = Contact(name, phone, email, address,city, state,pincode)
             addressBook.Add_Contact(new_contact)
             print("Contact added successfully!")
 
