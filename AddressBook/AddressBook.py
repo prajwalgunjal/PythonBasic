@@ -16,9 +16,32 @@ class AddressBook:
                 print("No Contacts to Display")
             else:
                 for contact in self.contacts:
-                    print(contact)
+                    print(f"Name: {contact.name}")
+                    print(f"Phone: {contact.phone}")
+                    print(f"Email: {contact.email}")
+                    print(f"Address: {contact.address}")
+                    print(f"City: {contact.city}")
+                    print(f"State: {contact.state}")
+                    print(f"Pincode: {contact.pincode}")
+                    print("-" * 20)  # Add a separator line between contacts or use any other formatting
+
         except Exception as e:
-            print (f"An Exception occurs {e}")
+            print(f"An Exception occurs: {e}")
+    def SerchContact(self,name):
+        try:
+            if not self.contacts:
+                print(f"No Count Found of name :- {name}")
+            else:
+                isPresent = None 
+                for contact in self.contacts:
+                    if contact.name == name:
+                        isPresent= True
+                    else:
+                        isPresent = False
+                if isPresent:
+                    print(f"{name} Contact Found:")
+        except Exception as e:
+            print(f"Exception while searching the contact")
 
     def DeleteContact(self, name):
         try:
@@ -31,7 +54,6 @@ class AddressBook:
                     if contact.name == name:
                         found_contact = contact
                         break
-
                 if found_contact:
                     self.contacts.remove(found_contact)
                     print(f"Contact '{name}' deleted successfully.")
@@ -53,7 +75,8 @@ if __name__ == "__main__":
             print("1. Add Contact")
             print("2. Display Contacts")
             print("3. Delete Contacts")
-            print("4. Exit")
+            print("4. Search By name")
+            print("0. Exit")
 
             choice = input("Enter your choice: ")
 
@@ -79,9 +102,12 @@ if __name__ == "__main__":
                     want_toSeeUpdated =input("Press y to See Updated List")
                     if want_toSeeUpdated.lower() == "y":
                         addressBook.Display()
-            elif choice == "4":
+            elif choice == "0":
                 print("Exiting Address Book.")
                 break
+            elif choice =="4":
+                nameToSearch = input("Enter name to Search :- ")
+                addressBook.SerchContact(nameToSearch)
             else:
                 print("Invalid choice. Please try again.")          
     except Exception as e:
