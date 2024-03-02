@@ -22,22 +22,28 @@ class AddressBook:
 
     def DeleteContact(self, name):
         try:
-            print()
             if not self.contacts:
                 print("No Contacts to Delete")
+                return False
             else:
-                 for contact in self.contacts:
+                found_contact = None
+                for contact in self.contacts:
                     if contact.name == name:
                         found_contact = contact
                         break
-                    if found_contact:
-                        self.contacts.remove(found_contact)
-                        print(f"Contact '{name}' deleted successfully.")
-                    else:
-                        print(f"Contact '{name}' not found.")
+
+                if found_contact:
+                    self.contacts.remove(found_contact)
+                    print(f"Contact '{name}' deleted successfully.")
+                    return True
+                else:
+                    print(f"Contact '{name}' not found.")
+                    return False
+
         except Exception as e:
             print(f"Exception Occurs While deleting Contacts {e}")
-            
+            return False
+
 if __name__ == "__main__":
     addressBook = AddressBook()
 
@@ -46,7 +52,8 @@ if __name__ == "__main__":
             print("\nAddress Book Menu:")
             print("1. Add Contact")
             print("2. Display Contacts")
-            print("3. Exit")
+            print("3. Delete Contacts")
+            print("4. Exit")
 
             choice = input("Enter your choice: ")
 
@@ -65,8 +72,14 @@ if __name__ == "__main__":
             elif choice == "2":
                 print("\n--- All Contacts ---")
                 addressBook.Display()
-
-            elif choice == "3":
+            elif choice =="3":
+                NameTodelete = input("Enter Name of the contact which you want to delete")
+                isdeleted =addressBook.DeleteContact(NameTodelete)
+                if isdeleted:
+                    want_toSeeUpdated =input("Press y to See Updated List")
+                    if want_toSeeUpdated.lower() == "y":
+                        addressBook.Display()
+            elif choice == "4":
                 print("Exiting Address Book.")
                 break
             else:
