@@ -36,7 +36,17 @@ class AddressBook:
         except Exception as e :
             print("Exception While converting to json")
 
-    
+    def readJson(self):
+        try:
+            with open('D:\Pyhton\AddressBook\Contact.json','r') as json_File:
+                data = json.load(json_File)
+                for i in data:
+                    contact = Contact(**i)
+                    self.contacts.append(contact)
+                return data
+            
+        except Exception as e:
+            print(f"Exception while reading Json")
     def SerchContact(self,name):
         try:
             if not self.contacts:
@@ -122,8 +132,8 @@ if __name__ == "__main__":
                 addressBook.SerchContact(nameToSearch)
             elif choice == "5":
                 addressBook.SaveTOJson()
-            #elif choice =="6":
-                #addressBook.readJson()
+            elif choice =="6":
+                addressBook.readJson()
             else:
                 print("Invalid choice. Please try again.")          
     except Exception as e:
