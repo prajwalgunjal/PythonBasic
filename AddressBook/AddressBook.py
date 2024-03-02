@@ -15,11 +15,29 @@ class AddressBook:
             if not self.contacts:
                 print("No Contacts to Display")
             else:
-                for contacts in self.contacts:
-                    print(contacts)
+                for contact in self.contacts:
+                    print(contact)
         except Exception as e:
             print (f"An Exception occurs {e}")
 
+    def DeleteContact(self, name):
+        try:
+            print()
+            if not self.contacts:
+                print("No Contacts to Delete")
+            else:
+                 for contact in self.contacts:
+                    if contact.name == name:
+                        found_contact = contact
+                        break
+                    if found_contact:
+                        self.contacts.remove(found_contact)
+                        print(f"Contact '{name}' deleted successfully.")
+                    else:
+                        print(f"Contact '{name}' not found.")
+        except Exception as e:
+            print(f"Exception Occurs While deleting Contacts {e}")
+            
 if __name__ == "__main__":
     addressBook = AddressBook()
 
