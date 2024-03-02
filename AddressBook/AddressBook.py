@@ -10,7 +10,7 @@ class AddressBook:
         except Exception as e:
             print(f"Error While Inserting in List{e}")
 
-    def Display(self):
+    def Display(self, data = None):
         try:
             if not self.contacts:
                 print("No Contacts to Display")
@@ -27,8 +27,16 @@ class AddressBook:
         except Exception as e:
             print(f"An Exception occurs: {e}")
 
+
     def SaveTOJson(self):
         try:
+            #here Firstly Reading from json file and then copying same data in list anf then again saving whole object as a json
+            with open('D:\Pyhton\AddressBook\Contact.json', 'r') as json_File:
+                    data = json.load(json_File)
+                    for i in data:
+                        contact = Contact(**i)
+                        self.contacts.append(contact)
+
             contacts_as_dict = [contact.to_dict() for contact in self.contacts]
             with open('D:\Pyhton\AddressBook\Contact.json','w') as json_File:
                 json.dump(contacts_as_dict,json_File,indent=2)
@@ -40,10 +48,15 @@ class AddressBook:
         try:
             with open('D:\Pyhton\AddressBook\Contact.json','r') as json_File:
                 data = json.load(json_File)
-                for i in data:
-                    contact = Contact(**i)
-                    self.contacts.append(contact)
-                return data
+                print("Reading from Json Sucessfull")
+                toDisplay = input("Do you want to Display Data From json then press y")
+                if toDisplay.lower() =="y":
+                    self.Display(data)
+                toAdd = input("Do you want to add this josn to our contact List")
+                if toAdd:
+                    for i in data:
+                        contact = Contact(**i)
+                        self.contacts.append(contact)
             
         except Exception as e:
             print(f"Exception while reading Json")
