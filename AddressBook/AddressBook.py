@@ -1,5 +1,5 @@
 from Person import Contact  # Importing directly without the dot
-
+import json
 class AddressBook:
     def __init__(self):
         self.contacts= []
@@ -23,10 +23,20 @@ class AddressBook:
                     print(f"City: {contact.city}")
                     print(f"State: {contact.state}")
                     print(f"Pincode: {contact.pincode}")
-                    print("-" * 20)  # Add a separator line between contacts or use any other formatting
-
+                    print("-" * 20)
         except Exception as e:
             print(f"An Exception occurs: {e}")
+
+    def SaveTOJson(self):
+        try:
+            contacts_as_dict = [contact.to_dict() for contact in self.contacts]
+            with open('D:\Pyhton\AddressBook\Contact.json','w') as json_File:
+                json.dump(contacts_as_dict,json_File,indent=2)
+                print("Contacts stored as JSON in 'contacts.json'")
+        except Exception as e :
+            print("Exception While converting to json")
+
+    
     def SerchContact(self,name):
         try:
             if not self.contacts:
@@ -76,6 +86,8 @@ if __name__ == "__main__":
             print("2. Display Contacts")
             print("3. Delete Contacts")
             print("4. Search By name")
+            print("5. Convert to json")
+            print("6. Read Json")
             print("0. Exit")
 
             choice = input("Enter your choice: ")
@@ -108,6 +120,10 @@ if __name__ == "__main__":
             elif choice =="4":
                 nameToSearch = input("Enter name to Search :- ")
                 addressBook.SerchContact(nameToSearch)
+            elif choice == "5":
+                addressBook.SaveTOJson()
+            #elif choice =="6":
+                #addressBook.readJson()
             else:
                 print("Invalid choice. Please try again.")          
     except Exception as e:

@@ -8,5 +8,15 @@ class Contact:
         self.state = state
         self.pincode = pincode
 
+    def to_dict(self):
+            return {
+                'name': self.name,
+                'phone': self.phone,
+                'email': self.email,
+                'address': self.address,
+                'city': self.city,
+                'state': self.state,
+                'pincode': self.pincode
+            }
     def __str__(self):
         return f"Name: {self.name}, Phone: {self.phone}, Email: {self.email}, Address: {self.address}, City: {self.city}, State: {self.state}, Pincode: {self.pincode}"
