@@ -99,6 +99,24 @@ class AddressBook:
             print(f"Exception Occurs While deleting Contacts {e}")
             return False
 
+    def EditContact(self, name):
+        try:
+            addressBook.readJson()
+            for con in self.contacts:
+                if con.name == name:
+                    con.name = input("Enter Name: ")
+                    con.phone = input("Enter Phone: ")
+                    con.email = input("Enter Email: ")
+                    con.address = input("Enter Address: ")
+                    con.city = input("Enter City: ")
+                    con.state = input("Enter State: ")
+                    con.pincode = input("Enter Pincode: ")
+                    print("Contact Editied successfully!")
+                    break
+            return True
+        except Exception as e:
+            print(f"Exception while editing Contact {e}")
+
 if __name__ == "__main__":
     addressBook = AddressBook()
 
@@ -111,6 +129,7 @@ if __name__ == "__main__":
             print("4. Search By name")
             print("5. Convert to json")
             print("6. Read Json")
+            print("7. Edit Contact")
             print("0. Exit")
 
             choice = input("Enter your choice: ")
@@ -128,6 +147,7 @@ if __name__ == "__main__":
                 print("Contact added successfully!")
 
             elif choice == "2":
+                addressBook.readJson()
                 print("\n--- All Contacts ---")
                 addressBook.Display()
             elif choice =="3":
@@ -147,6 +167,9 @@ if __name__ == "__main__":
                 addressBook.SaveTOJson()
             elif choice =="6":
                 addressBook.readJson()
+            elif choice == "7":
+                name = input("ENter name of the contact")
+                addressBook.EditContact(name)
             else:
                 print("Invalid choice. Please try again.")          
     except Exception as e:
